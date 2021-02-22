@@ -1,3 +1,5 @@
+
+
 const express = require('express');
 const app = express();
 const expressLayouts = require('express-ejs-layouts');
@@ -9,6 +11,16 @@ app.set('views', __dirname + '/views');
 app.set('layout', 'layouts/layout');
 app.use(expressLayouts);
 app.use(express.static('public'));
+
+// const mongoose = require('mongoose');
+// DATABASE_URL = 'mongodb://localhost/inventory;'
+// mongoose.connect(process.nextTick.DATABASE_URL, { 
+//     useNewUrlParser: true
+// }); 
+
+// const db = mongoose.connection
+// db.on( 'error',  error => console.log(error) );
+// db.once('open', () => console.log('Connected') );
 
 app.use('/', indexRouter);
 
