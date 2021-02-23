@@ -6,7 +6,6 @@ const ItemSchema = new mongoose.Schema({
     amountInOz: String 
 });
 
-// module.exports = mongoose.model('Items', ItemSchema);
 export default mongoose.model('Items', ItemSchema);
 
 

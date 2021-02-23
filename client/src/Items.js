@@ -21,9 +21,9 @@ function Items() {
             const req = await axios.post('/inventory/item',
             {
                 newItem: {
-                    name:'Brady Test',
-                    amountInP: '6',
-                    amountInOz: '10',
+                    name:'Brady Test 2',
+                    amountInP: '133',
+                    amountInOz: '7',
                 }
             });
 
