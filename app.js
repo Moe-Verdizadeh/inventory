@@ -24,7 +24,12 @@ mongoose.connect(connection_url, {
 app.get('/', (req, res) => res.status(200).send("hello"));
 
 app.post('/inventory/item', (req, res) => {
-    const dbItem = req.body;
+    const dbItem = req.body.newItem;
+
+    console.log('Inventory');
+    console.log(req.body.newItem);
+
+
 
     Items.create( dbItem , (err , data) => {
         if(err){

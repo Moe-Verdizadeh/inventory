@@ -4,9 +4,10 @@ const ItemSchema = new mongoose.Schema({
     name: String,
     amountInP: String,
     amountInOz: String 
-})
+});
 
-export default mongoose.model('Items', ItemSchema );
+// module.exports = mongoose.model('Items', ItemSchema);
+export default mongoose.model('Items', ItemSchema);
 
 
 // [
