@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react'
+import { Button, Col, Row, Form, Table } from 'react-bootstrap'; 
 import axios from './axios'
 
 function Items() {
@@ -38,16 +39,50 @@ function Items() {
 
 
     return (
-        <div>
-            <button onClick={clickHandler}>New Item</button>
-        <p>this is the items list</p><br/>
-            {items.map((item) =>(
-                <h4>
-                    <span>{item.name} </span><br/><br/>
-                    <span>{item.amountInP} Pounds </span><br/><br/>
-                    <span>{item.amountInOz} Oz </span><br/><br/><br/><br/>
-                </h4> 
-            ))}
+        <div >
+            <div className="pt-5 pb-5">
+                <Form>
+                    <Row>
+                        <Col>
+                          <Form.Control placeholder="Name" />
+                        </Col>
+                        <Col>
+                            <Form.Control placeholder="0 lb" />
+                        </Col>
+                        <Col>
+                            <Form.Control placeholder="0 Oz" />
+                        </Col>
+                        <Col>
+                            <Button variant="primary" onClick={clickHandler} >New Item</Button>  
+                        </Col>
+                    </Row>
+                    <Row>
+                        
+                    </Row>
+                </Form> 
+            </div>  
+            <div>
+                {items.map((item) =>( 
+                    <div> 
+                        <Table striped bordered hover>
+                            <thead>
+                                <tr> 
+                                    <th>Name</th>
+                                    <th>lb</th>
+                                    <th>oz</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>{item.name}</td>
+                                    <td>{item.amountInP}</td>
+                                    <td>{item.amountInOz}</td> 
+                                </tr> 
+                            </tbody>
+                        </Table>
+                    </div> 
+                ))}
+            </div>
         </div>
     )
 }
