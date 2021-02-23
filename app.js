@@ -40,6 +40,11 @@ app.post('/inventory/item', (req, res) => {
     })
 });
 
+app.delete('/delete/id', async (req, res) => {
+    const id = req.body.id;
+    await FriendModel.findByIdAndRemove(id).exec(); 
+})
+
 app.get('/inventory/item', (req, res) => {
     Items.find((err , data) => {
         if(err){
