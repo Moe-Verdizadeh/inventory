@@ -1,12 +1,9 @@
 import mongoose from 'mongoose';
 
 const ItemSchema = new mongoose.Schema({
-    // name: String,
-    // amountInP: String,
-    // amountInOz: String
     name: String,
     amountInP: String,
-    amountInOz: String
+    amountInOz: String 
 })
 
 export default mongoose.model('Items', ItemSchema );
