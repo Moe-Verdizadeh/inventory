@@ -4,6 +4,7 @@ import axios from './axios'
 
 function Items() {
     const [items, setItems] = useState([]);
+    const [itemInfo, setItemInfo] = useState({});
     
     async function fetchData(){
         const req = await axios.get('/inventory/item');
@@ -21,11 +22,7 @@ function Items() {
         try {
             const req = await axios.post('/inventory/item',
             {
-                newItem: {
-                    name:'Brady Test 2',
-                    amountInP: '133',
-                    amountInOz: '7',
-                }
+                newItem: itemInfo
             });
 
             console.log('posted');
@@ -37,6 +34,17 @@ function Items() {
         }
     }
 
+    function changeHandler(event) {
+        event.persist();
+        const name = event.target.name;
+        const value = event.target.value;
+
+        setItemInfo(itemInfo => {
+            return {
+                ...itemInfo, [name]: value
+            }
+        });
+    }
 
     return (
         <div >
@@ -44,16 +52,16 @@ function Items() {
                 <Form>
                     <Row>
                         <Col>
-                          <Form.Control placeholder="Name" />
+                          <Form.Control placeholder="Name" onChange={changeHandler} name='name'/>
                         </Col>
                         <Col>
-                            <Form.Control placeholder="0 lb" />
+                            <Form.Control placeholder="0 lb" onChange={changeHandler} name='amountInP'/>
                         </Col>
                         <Col>
-                            <Form.Control placeholder="0 Oz" />
+                            <Form.Control placeholder="0 Oz" onChange={changeHandler} name='amountInOz'/>
                         </Col>
                         <Col>
-                            <Button variant="primary" onClick={clickHandler} >New Item</Button>  
+                            <Button variant="primary" onClick={clickHandler}>New Item</Button>  
                         </Col>
                     </Row>
                     <Row>
