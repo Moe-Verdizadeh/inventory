@@ -82,14 +82,14 @@ function Items() {
                             <th>oz</th>
                         </tr>
                     </thead>
-                    <tbody>
+                    <tbody> 
                     {items.map((item) =>(
                         <tr>
                             <td>{item.name}</td>
                             <td>{item.amountInP}</td>
                             <td>{item.amountInOz}</td> 
                         </tr> 
-                    ))}
+                    ))}  
                     </tbody>
                 </Table>
             </div>
