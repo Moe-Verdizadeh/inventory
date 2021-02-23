@@ -26,7 +26,11 @@ function Items() {
             });
 
             console.log('posted');
+            Array.from(document.querySelectorAll("input")).forEach(
+                input => (input.value = "")
+            );
 
+            setItemInfo({});
             fetchData();
         } catch(error) {
             console.log('error');
@@ -52,13 +56,13 @@ function Items() {
                 <Form>
                     <Row>
                         <Col>
-                          <Form.Control placeholder="Name" onChange={changeHandler} name='name'/>
+                          <Form.Control placeholder="Name" onChange={changeHandler} name='name' value={itemInfo.name}/>
                         </Col>
                         <Col>
-                            <Form.Control placeholder="0 lb" onChange={changeHandler} name='amountInP'/>
+                            <Form.Control placeholder="0 lb" onChange={changeHandler} name='amountInP' value={itemInfo.amountInP}/>
                         </Col>
                         <Col>
-                            <Form.Control placeholder="0 Oz" onChange={changeHandler} name='amountInOz'/>
+                            <Form.Control placeholder="0 Oz" onChange={changeHandler} name='amountInOz' value={itemInfo.amountInOz}/>
                         </Col>
                         <Col>
                             <Button variant="primary" onClick={clickHandler}>New Item</Button>  
@@ -78,15 +82,15 @@ function Items() {
                             <th>oz</th>
                         </tr>
                     </thead>
+                    <tbody>
                     {items.map((item) =>(
-                        <tbody>
-                            <tr>
-                                <td>{item.name}</td>
-                                <td>{item.amountInP}</td>
-                                <td>{item.amountInOz}</td> 
-                            </tr> 
-                        </tbody>
+                        <tr>
+                            <td>{item.name}</td>
+                            <td>{item.amountInP}</td>
+                            <td>{item.amountInOz}</td> 
+                        </tr> 
                     ))}
+                    </tbody>
                 </Table>
             </div>
         </div>
