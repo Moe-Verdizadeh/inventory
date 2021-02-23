@@ -70,26 +70,24 @@ function Items() {
                 </Form> 
             </div>  
             <div>
-                {items.map((item) =>( 
-                    <div> 
-                        <Table striped bordered hover>
-                            <thead>
-                                <tr> 
-                                    <th>Name</th>
-                                    <th>lb</th>
-                                    <th>oz</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>{item.name}</td>
-                                    <td>{item.amountInP}</td>
-                                    <td>{item.amountInOz}</td> 
-                                </tr> 
-                            </tbody>
-                        </Table>
-                    </div> 
-                ))}
+                <Table striped bordered hover>
+                    <thead>
+                        <tr> 
+                            <th>Name</th>
+                            <th>lb</th>
+                            <th>oz</th>
+                        </tr>
+                    </thead>
+                    {items.map((item) =>(
+                        <tbody>
+                            <tr>
+                                <td>{item.name}</td>
+                                <td>{item.amountInP}</td>
+                                <td>{item.amountInOz}</td> 
+                            </tr> 
+                        </tbody>
+                    ))}
+                </Table>
             </div>
         </div>
     )
