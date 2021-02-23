@@ -70,12 +70,14 @@ function Items() {
                 </Form> 
             </div>  
             <div>
-                <Table striped bordered hover>
+                <Table striped bordered hover variant="dark">
                     <thead>
                         <tr> 
                             <th>Name</th>
                             <th>lb</th>
                             <th>oz</th>
+                            <th>Edit</th>
+                            <th>Delete</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -84,6 +86,8 @@ function Items() {
                                 <td>{item.name}</td>
                                 <td>{item.amountInP}</td>
                                 <td>{item.amountInOz}</td> 
+                                <td><Button variant="outline-warning">Edit</Button> </td> 
+                                <td><Button variant="outline-danger">Delete</Button> </td> 
                             </tr> 
                         ))}
                     </tbody>
