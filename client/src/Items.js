@@ -78,15 +78,15 @@ function Items() {
                             <th>oz</th>
                         </tr>
                     </thead>
-                    {items.map((item) =>(
-                        <tbody>
+                    <tbody>
+                        {items.map((item) =>(
                             <tr>
                                 <td>{item.name}</td>
                                 <td>{item.amountInP}</td>
                                 <td>{item.amountInOz}</td> 
                             </tr> 
-                        </tbody>
-                    ))}
+                        ))}
+                    </tbody>
                 </Table>
             </div>
         </div>
