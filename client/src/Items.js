@@ -50,8 +50,12 @@ function Items() {
         });
     }
     //deleting data
-    function deleteHandler(id){
-        axios.delete(`/delete${id}`)
+    function deleteHandler(event){
+        axios.delete(`/delete/${event.target.id}`)
+        .then(response => {
+            console.log('deleted');
+        })
+        .catch(err => console.log(err));
  
     }
 
@@ -89,16 +93,6 @@ function Items() {
                             <th>Delete</th>
                         </tr>
                     </thead>
-<<<<<<< HEAD
-                    <tbody> 
-                    {items.map((item) =>(
-                        <tr>
-                            <td>{item.name}</td>
-                            <td>{item.amountInP}</td>
-                            <td>{item.amountInOz}</td> 
-                        </tr> 
-                    ))}  
-=======
                     <tbody>
                         {items.map((item) =>(
                             <tr>
@@ -106,10 +100,9 @@ function Items() {
                                 <td>{item.amountInP}</td>
                                 <td>{item.amountInOz}</td> 
                                 <td><Button variant="outline-warning">Edit</Button> </td> 
-                                <td><Button variant="outline-danger" onClick={deleteHandler}>Delete</Button> </td> 
+                                <td><Button variant="outline-danger" id={item._id} onClick={deleteHandler}>Delete</Button> </td>
                             </tr> 
                         ))}
->>>>>>> master
                     </tbody>
                 </Table>
             </div>

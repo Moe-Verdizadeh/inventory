@@ -40,10 +40,15 @@ app.post('/inventory/item', (req, res) => {
     })
 });
 
-app.delete('/delete/id', async (req, res) => {
-    const id = req.body.id;
-    await FriendModel.findByIdAndRemove(id).exec(); 
-})
+app.delete('/delete/:id', async (req, res) => {
+    const id = req.params.id;
+
+    Items.deleteOne({
+        _id: id
+    })
+    .then(() => res.status(200).send({ success: `Successfully deleted ${id}`}))
+    .catch(err => console.log(err));
+});
 
 app.get('/inventory/item', (req, res) => {
     Items.find((err , data) => {
@@ -53,7 +58,7 @@ app.get('/inventory/item', (req, res) => {
             res.status(200).send(data);
         }
     })
-}) 
+});
 //listener
 app.listen(port, () => console.log(`Listing on port: ${port}`))
 
