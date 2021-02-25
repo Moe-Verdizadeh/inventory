@@ -50,7 +50,7 @@ app.delete('/delete/:id', async (req, res) => {
     .catch(err => console.log(err));
 });
 
-app.get('/inventory/item', (req, res) => {
+app.get('/inventory', (req, res) => {
     Items.find((err , data) => {
         if(err){
              res.status(500).send(err);
@@ -58,6 +58,24 @@ app.get('/inventory/item', (req, res) => {
             res.status(200).send(data);
         }
     })
+});
+
+app.get('/inventory/item/:id', (req, res) => {
+    Items.findOne({
+        _id: req.params.id
+    })
+    .then(item => {
+        res.status(200).send(item);
+    })
+    .catch(err => console.log(err));
+});
+
+app.put('/inventory/item/:id', (req, res) => {
+    Items.updateOne({
+        _id: req.params.id
+    }, req.body.editedItem)
+    .then(() => res.status(200).send({success: "Sucessfully updated"}))
+    .catch(err => console.log(err));
 });
 //listener
 app.listen(port, () => console.log(`Listing on port: ${port}`))
