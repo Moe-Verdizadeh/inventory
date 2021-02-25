@@ -3,10 +3,8 @@ import ReactDOM from 'react-dom';
 import App from './App'; 
 import { Container } from 'react-bootstrap';
 
-ReactDOM.render(
-  <Container fluid>
-    <App />
-  </Container>,
+ReactDOM.render( 
+    <App /> ,
   document.getElementById('root')
 );
 
