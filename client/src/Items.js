@@ -11,7 +11,7 @@ function Items() {
         console.log('request');
         console.log(req);
 
-        setItems(req.data)
+        setItems(req.data);
     }
 
     useEffect(() => { 
@@ -51,9 +51,12 @@ function Items() {
     }
     //deleting data
     function deleteHandler(event){
+        console.log(items);
+
         axios.delete(`/delete/${event.target.id}`)
         .then(response => {
             console.log('deleted');
+            fetchData();
         })
         .catch(err => console.log(err));
  
