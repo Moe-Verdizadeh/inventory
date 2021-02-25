@@ -5,7 +5,7 @@ import axios from './axios'
 function Items() {
     const [items, setItems] = useState([]);
     const [itemInfo, setItemInfo] = useState({});
-    
+    // fetching data
     async function fetchData(){
         const req = await axios.get('/inventory/item');
         console.log('request');
@@ -17,7 +17,7 @@ function Items() {
     useEffect(() => { 
         fetchData();
     }, [])
-
+    // adding data (button)
     async function clickHandler() {
         try {
             const req = await axios.post('/inventory/item',
@@ -37,7 +37,7 @@ function Items() {
             console.error(error);
         }
     }
-
+    // adding data from input form to the 'setItemInfo'
     function changeHandler(event) {
         event.persist();
         const name = event.target.name;
@@ -48,6 +48,11 @@ function Items() {
                 ...itemInfo, [name]: value
             }
         });
+    }
+    //deleting data
+    function deleteHandler(id){
+        axios.delete(`/delete${id}`)
+ 
     }
 
     return (
@@ -74,14 +79,17 @@ function Items() {
                 </Form> 
             </div>  
             <div>
-                <Table striped bordered hover>
+                <Table striped bordered hover variant="dark">
                     <thead>
                         <tr> 
                             <th>Name</th>
                             <th>lb</th>
                             <th>oz</th>
+                            <th>Edit</th>
+                            <th>Delete</th>
                         </tr>
                     </thead>
+<<<<<<< HEAD
                     <tbody> 
                     {items.map((item) =>(
                         <tr>
@@ -90,6 +98,18 @@ function Items() {
                             <td>{item.amountInOz}</td> 
                         </tr> 
                     ))}  
+=======
+                    <tbody>
+                        {items.map((item) =>(
+                            <tr>
+                                <td>{item.name}</td>
+                                <td>{item.amountInP}</td>
+                                <td>{item.amountInOz}</td> 
+                                <td><Button variant="outline-warning">Edit</Button> </td> 
+                                <td><Button variant="outline-danger" onClick={deleteHandler}>Delete</Button> </td> 
+                            </tr> 
+                        ))}
+>>>>>>> master
                     </tbody>
                 </Table>
             </div>
