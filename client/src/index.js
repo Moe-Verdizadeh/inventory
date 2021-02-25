@@ -1,12 +1,12 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
-import './index.css';
+import ReactDOM from 'react-dom'; 
 import App from './App'; 
+import { Container } from 'react-bootstrap';
 
 ReactDOM.render(
-  <React.StrictMode>
+  <Container fluid>
     <App />
-  </React.StrictMode>,
+  </Container>,
   document.getElementById('root')
 );
 
