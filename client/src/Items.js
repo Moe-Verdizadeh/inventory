@@ -1,13 +1,46 @@
 import React, { useState, useEffect } from 'react'
-import { Button, Col, Row, Form, Table } from 'react-bootstrap'; 
+import { Button, Col, Row, Form, Table, Modal } from 'react-bootstrap'; 
 import axios from './axios'
 
 function Items() {
     const [items, setItems] = useState([]);
     const [itemInfo, setItemInfo] = useState({});
+    const [show, setShow] = useState(false);
+    const [currentEditItem, setCurrentEditItem] = useState({});
+
+    const closeHandler = (event) => {
+        setCurrentEditItem({});
+        setShow(false);
+    };
+
+    const saveEditHandler = (event) => {
+        axios.put(`/inventory/item/${event.target.dataset.itemId}`,
+        {
+            editedItem: currentEditItem
+        })
+        .then(response => {
+            console.log(response);
+            setCurrentEditItem({});
+            setShow(false);
+            fetchData();
+        })
+        .catch(err => console.log(err));
+    };
+
+    const showHandler = async (event) => {
+        try {
+            const itemToEdit = await axios.get(`/inventory/item/${event.target.dataset.itemId}`);
+            
+            setCurrentEditItem(itemToEdit.data);
+            setShow(true);
+        } catch(err) {
+            console.log(err);
+        }
+    };
+
     // fetching data
     async function fetchData(){
-        const req = await axios.get('/inventory/item');
+        const req = await axios.get('/inventory');
         console.log('request');
         console.log(req);
 
@@ -49,11 +82,22 @@ function Items() {
             }
         });
     }
+    // adding data to 'currentEditItem'
+    function editingChangeHandler(event) {
+        event.persist();
+        const name = event.target.name;
+        const value = event.target.value;
+
+        setCurrentEditItem(currentEditItem => {
+            return {
+                ...currentEditItem, [name]: value
+            }
+        });
+    }
     //deleting data
     function deleteHandler(event){
-        console.log(items);
 
-        axios.delete(`/delete/${event.target.id}`)
+        axios.delete(`/delete/${event.target.dataset.itemId}`)
         .then(response => {
             console.log('deleted');
             fetchData();
@@ -102,15 +146,48 @@ function Items() {
                                 <td>{item.name}</td>
                                 <td>{item.amountInP}</td>
                                 <td>{item.amountInOz}</td> 
-                                <td><Button variant="outline-warning">Edit</Button> </td> 
-                                <td><Button variant="outline-danger" id={item._id} onClick={deleteHandler}>Delete</Button> </td>
+                                <td><Button variant="outline-warning" data-item-id={item._id} onClick={showHandler}>Edit</Button> </td> 
+                                <td><Button variant="outline-danger" data-item-id={item._id} onClick={deleteHandler}>Delete</Button> </td>
                             </tr> 
                         ))}
                     </tbody>
                 </Table>
             </div>
+            <Modal show={show} onHide={closeHandler}>
+                <Modal.Header closeButton>
+                    <Modal.Title>Test</Modal.Title>
+                </Modal.Header>
+                <Modal.Body>
+                <Form>
+                    <Row className="justify-content-md-center">
+                        <Col className="justify-content-md-center" lg="6">
+                            <Form.Label>Test</Form.Label>
+                            <Form.Control placeholder="Name" name='name' onChange={editingChangeHandler} value={currentEditItem?.name}/>
+                        </Col>
+                    </Row>
+                    <Row className="justify-content-md-center">
+                        <Col lg="6">
+                            <Form.Control placeholder="0 lb" name='amountInP' onChange={editingChangeHandler} value={currentEditItem?.amountInP}/>
+                        </Col>
+                    </Row>
+                    <Row className="justify-content-md-center">
+                        <Col lg="6">
+                            <Form.Control placeholder="0 Oz" name='amountInOz' onChange={editingChangeHandler} value={currentEditItem?.amountInOz}/>
+                        </Col>
+                    </Row>
+                </Form> 
+                </Modal.Body>
+                <Modal.Footer>
+                    <Button variant="secondary" onClick={closeHandler}>
+                        Close
+                    </Button>
+                    <Button variant="primary" data-item-id={currentEditItem?._id} onClick={saveEditHandler}>
+                        Save Changes
+                    </Button>
+                </Modal.Footer>
+            </Modal>
         </div>
     )
 }
 
-export default Items
+export default Items;
