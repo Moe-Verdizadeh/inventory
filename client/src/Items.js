@@ -26,7 +26,11 @@ function Items() {
             });
 
             console.log('posted');
+            Array.from(document.querySelectorAll("input")).forEach(
+                input => (input.value = "")
+            );
 
+            setItemInfo({});
             fetchData();
         } catch(error) {
             console.log('error');
@@ -46,8 +50,12 @@ function Items() {
         });
     }
     //deleting data
-    function deleteHandler(id){
-        axios.delete(`/delete${id}`)
+    function deleteHandler(event){
+        axios.delete(`/delete/${event.target.id}`)
+        .then(response => {
+            console.log('deleted');
+        })
+        .catch(err => console.log(err));
  
     }
 
@@ -57,13 +65,13 @@ function Items() {
                 <Form>
                     <Row>
                         <Col>
-                          <Form.Control placeholder="Name" onChange={changeHandler} name='name'/>
+                          <Form.Control placeholder="Name" onChange={changeHandler} name='name' value={itemInfo.name}/>
                         </Col>
                         <Col>
-                            <Form.Control placeholder="0 lb" onChange={changeHandler} name='amountInP'/>
+                            <Form.Control placeholder="0 lb" onChange={changeHandler} name='amountInP' value={itemInfo.amountInP}/>
                         </Col>
                         <Col>
-                            <Form.Control placeholder="0 Oz" onChange={changeHandler} name='amountInOz'/>
+                            <Form.Control placeholder="0 Oz" onChange={changeHandler} name='amountInOz' value={itemInfo.amountInOz}/>
                         </Col>
                         <Col>
                             <Button variant="primary" onClick={clickHandler}>New Item</Button>  
@@ -92,7 +100,7 @@ function Items() {
                                 <td>{item.amountInP}</td>
                                 <td>{item.amountInOz}</td> 
                                 <td><Button variant="outline-warning">Edit</Button> </td> 
-                                <td><Button variant="outline-danger" onClick={deleteHandler}>Delete</Button> </td> 
+                                <td><Button variant="outline-danger" id={item._id} onClick={deleteHandler}>Delete</Button> </td>
                             </tr> 
                         ))}
                     </tbody>
