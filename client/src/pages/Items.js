@@ -1,6 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { Button, Col, Row, Form, Table, Modal } from 'react-bootstrap'; 
 import axios from '../axios';
+import EditModal from '../components/EditModal';
+import ItemTable from '../components/ItemTable';
+import NewItemForm from '../components/NewItemForm';
 
 function Items() {
     const [items, setItems] = useState([]);
@@ -116,91 +119,12 @@ function Items() {
     return (
         <div >
             <div className="pt-5 pb-5">
-                <Form>
-                    <Row>
-                        <Col>
-                          <Form.Control placeholder="Name" onChange={changeHandler} name='name' value={itemInfo.name ? itemInfo.name : ""}/>
-                        </Col>
-                        <Col>
-                            <Form.Control placeholder="0 P" onChange={changeHandler} name='amountInP' value={itemInfo.amountInP ? itemInfo.amountInP : ""}/>
-                        </Col>
-                        <Col>
-                            <Form.Control placeholder="0 Oz" onChange={changeHandler} name='amountInOz' value={itemInfo.amountInOz ? itemInfo.amountInOz : ""}/>
-                        </Col>
-                        <Col>
-                            <Button variant="primary" onClick={clickHandler}>New Item</Button>  
-                        </Col>
-                    </Row>
-                    <Row>
-                        
-                    </Row>
-                </Form> 
+                <NewItemForm changeHandler={changeHandler} itemInfo={itemInfo} clickHandler={clickHandler}/>
             </div>  
             <div>
-                <Table striped bordered hover variant="dark">
-                    <thead>
-                        <tr> 
-                            <th>Name</th>
-                            <th>Pounds</th>
-                            <th>oz</th>
-                            <th>Edit</th>
-                            <th>Delete</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {items.map((item) =>(
-                            <tr key={item._id}>
-                                <td>{item.name}</td>
-                                <td>{item.amountInP}</td>
-                                <td>{item.amountInOz}</td> 
-                                <td><Button variant="outline-warning" data-item-id={item._id} onClick={showHandler}>Edit</Button> </td> 
-                                <td><Button variant="outline-danger" data-item-id={item._id} onClick={deleteHandler}>Delete</Button> </td>
-                            </tr> 
-                        ))}
-                    </tbody>
-                </Table>
+                <ItemTable items={items} showHandler={showHandler} deleteHandler={deleteHandler} />
             </div>
-            <Modal show={show} onHide={closeHandler}>
-                <Modal.Header closeButton>
-                    <Modal.Title>Edit</Modal.Title>
-                </Modal.Header>
-                <Modal.Body>
-                <Form>
-                    <Row className="justify-content-md-center">
-                        <Col className="text-center" lg="2">
-                            <Form.Label>Name</Form.Label>
-                        </Col>
-                        <Col lg="6">
-                            <Form.Control placeholder="Name" name='name' onChange={editingChangeHandler} value={currentEditItem?.name ? currentEditItem.name : ""}/>
-                        </Col>
-                    </Row>
-                    <Row className="justify-content-md-center">
-                        <Col className="text-center" lg="2">
-                            <Form.Label>lb</Form.Label>
-                        </Col>
-                        <Col lg="6">
-                            <Form.Control placeholder="0 lb" name='amountInP' onChange={editingChangeHandler} value={currentEditItem?.amountInP ? currentEditItem?.amountInP : ""}/>
-                        </Col>
-                    </Row>
-                    <Row className="justify-content-md-center">
-                        <Col className="text-center" lg="2">
-                            <Form.Label>oz</Form.Label>
-                        </Col>
-                        <Col lg="6">
-                            <Form.Control placeholder="0 Oz" name='amountInOz' onChange={editingChangeHandler} value={currentEditItem?.amountInOz ? currentEditItem?.amountInOz : "" }/>
-                        </Col>
-                    </Row>
-                </Form> 
-                </Modal.Body>
-                <Modal.Footer>
-                    <Button variant="secondary" onClick={closeHandler}>
-                        Close
-                    </Button>
-                    <Button variant="primary" data-item-id={currentEditItem?._id} onClick={saveEditHandler}>
-                        Save Changes
-                    </Button>
-                </Modal.Footer>
-            </Modal>
+            <EditModal show={show} closeHandler={closeHandler} editingChangeHandler={editingChangeHandler} saveEditHandler={saveEditHandler} currentEditItem={currentEditItem} />
         </div>
     )
 }
