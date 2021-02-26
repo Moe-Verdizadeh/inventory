@@ -20,7 +20,6 @@ function App() {
     <div> 
       <Header/> 
       <div >
-        <Locations />
         <Items />  
         {/* <div className="wrapper">
           <h1>Application</h1>
