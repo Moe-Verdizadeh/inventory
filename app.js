@@ -20,6 +20,13 @@ mongoose.connect(connection_url, {
     useUnifiedTopology: true,
 })
 
+//login handler
+app.use('/login', (req, res) => {
+    res.send({
+      token: 'test123'
+    });
+});
+
 //API Endpoint
 app.get('/', (req, res) => res.status(200).send("hello"));
 
