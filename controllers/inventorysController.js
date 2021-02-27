@@ -42,6 +42,6 @@ export const update = (req, res) => {
     Inventory.updateOne({
         _id: req.params.id
     }, req.body.editedItem)
-    .then(() => res.status(200).send({success: "Sucessfully updated"}))
+    .then(() => res.status(200).send({success: "Successfully updated"}))
     .catch(err => console.log(err));
 };
