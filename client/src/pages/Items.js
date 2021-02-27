@@ -68,7 +68,7 @@ function Items() {
     //deleting data
     function deleteHandler(event){
 
-        axios.delete(`/delete/${event.target.dataset.itemId}`)
+        axios.delete(`/inventory/delete/${event.target.dataset.itemId}`)
         .then(response => {
             fetchData();
         })
