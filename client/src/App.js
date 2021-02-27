@@ -1,6 +1,7 @@
 import React, { useState }  from 'react';
 import './App.css';
 import Header from './components/Header';
+import Sidebar from './components/Sidebar';
 import Items from './pages/Items'; 
 import Locations from './pages/Locations'; 
 import 'bootstrap/dist/css/bootstrap.min.css'; 
@@ -11,16 +12,17 @@ import Login from './components/Login/Login'
 
 function App() {
  
-  const [token, setToken] = useState();
-  if(!token) {
-    return <Login setToken={setToken} />
-  } 
+  // const [token, setToken] = useState();
+  // if(!token) {
+  //   return <Login setToken={setToken} />
+  // } 
 
   return (
     <div> 
-      <Header/> 
-      <div >
-        <Items />  
+      <Dashboard />
+      {/* <Header/> 
+      <Sidebar /> */}
+      <div > 
         {/* <div className="wrapper">
           <h1>Application</h1>
           <BrowserRouter>

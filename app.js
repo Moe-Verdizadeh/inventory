@@ -30,6 +30,7 @@ app.use('/login', (req, res) => {
 //API Endpoint
 app.get('/', (req, res) => res.status(200).send("hello"));
 
+/////// Post New Item
 app.post('/inventory/item', (req, res) => {
     const dbItem = req.body.newItem;
 
@@ -46,7 +47,7 @@ app.post('/inventory/item', (req, res) => {
         }
     })
 });
-
+/////// Delete Item
 app.delete('/delete/:id', async (req, res) => {
     const id = req.params.id;
 
@@ -66,7 +67,7 @@ app.get('/inventory', (req, res) => {
         }
     })
 });
-
+/////// Get Item by Id
 app.get('/inventory/item/:id', (req, res) => {
     Items.findOne({
         _id: req.params.id
@@ -76,7 +77,7 @@ app.get('/inventory/item/:id', (req, res) => {
     })
     .catch(err => console.log(err));
 });
-
+/////// update Item by id
 app.put('/inventory/item/:id', (req, res) => {
     Items.updateOne({
         _id: req.params.id
