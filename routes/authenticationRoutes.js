@@ -6,7 +6,8 @@ const router = express.Router();
 import * as AuthenticationController from '../controllers/authenticationController.js';
 
 // Declare the routes
-router.post('/', AuthenticationController.userLogin);  
+router.post('/', AuthenticationController.userLoginCreate);  
+router.post('/auth', AuthenticationController.userLogin);  
 
 // Export
 export default router;
