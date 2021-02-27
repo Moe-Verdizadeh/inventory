@@ -1,5 +1,5 @@
-export const login = (req, res) => {
-    res.send({
-        token: 'test123'
-    });
+import User from '../models/user';
+
+export const user = (req, res) => {
+    res.send('heeeee') 
 };
