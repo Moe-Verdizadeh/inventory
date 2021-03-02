@@ -1,9 +1,7 @@
 import User from '../models/user.js';
 import bcrypt from 'bcryptjs';
-import jwt from 'jsonwebtoken'; 
-// const {
-//     createJWT
-//  } = require("../utils/auth");
+import jwt from 'jsonwebtoken';  
+// this needs to go .env
 const TOKEN_SECRET = "my_secret"
 
 export const userLoginCreate = (req, res, next) => {
@@ -97,14 +95,6 @@ function createJWT(email, userId, duration) {
     return jwt.sign(payload, TOKEN_SECRET, {
       expiresIn: duration,
     });
- };
-
-// export const userToken = ( res, req ) => {
-//     User.findById( req.user.id )
-//     .select( '-password' )
-//     .then( user => res.json( user ) )
-// }
-
-
+ }; 
 
  
