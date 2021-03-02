@@ -2,6 +2,8 @@
 import express from 'express';
 const router = express.Router();
 
+
+
 // Import the controller
 import * as InventoryController from '../controllers/inventorysController.js';
 
