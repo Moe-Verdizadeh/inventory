@@ -15,6 +15,7 @@ function App() {
     <div> 
       <Dashboard />  
       <SignUp /> 
+      <SignIn /> 
     </div>
   );
 }
