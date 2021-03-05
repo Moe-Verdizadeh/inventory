@@ -1,5 +1,6 @@
 import axios from 'axios';
-import React, { useState } from 'react'
+import React, { useState } from 'react';
+import { FormGroup, Form, Button } from 'react-bootstrap';
 
 export default function Signup() {
 
@@ -22,17 +23,37 @@ export default function Signup() {
     } 
   }
 
-  return (
+  return ( 
     <div>
-        <h1>
-          Please Register New Account
-        </h1>
-        <form onSubmit={signUp}>
-          <input type="userName" placeholder="User Name" onChange={( e ) => setUserName(e.target.value)} value={userName}/>
-          <input type="email" placeholder="Email@example.com" onChange={( e ) => setEmail(e.target.value)} value={email}/>
-          <input type="password" placeholder="Password" onChange={( e ) => setPassword(e.target.value)} value={password}/>
-          <button type="submit">Submit</button>
-        </form>
+      <div className="display-4 offset-4 col-4">Please Sign up</div>
+      <div className="offset-4 col-4">
+        <Form onSubmit={signUp}>
+          <Form.Group controlId="formBasicEmail">
+            <Form.Label>User Name</Form.Label>
+            <Form.Control type="name" placeholder="Enter Name" onChange={( e ) => setUserName(e.target.value)} value={userName} /> 
+          </Form.Group>
+
+          <Form.Group controlId="formBasicPassword">
+            <Form.Label>Email</Form.Label>
+            <Form.Control type="email" placeholder="Email" onChange={( e ) => setEmail(e.target.value)} value={email} />
+          </Form.Group>
+
+          <Form.Group controlId="formBasicPassword">
+            <Form.Label>Password</Form.Label>
+            <Form.Control type="password" placeholder="Password" onChange={( e ) => setPassword(e.target.value)} value={password} />
+          </Form.Group>
+
+          {/* <Form.Group controlId="formBasicCheckbox">
+          <Form.Check type="checkbox" label="Check me out" />
+          </Form.Group> */}
+
+          <Button variant="primary" type="submit">Sign Up</Button>
+        </Form>
+      </div>  
     </div>
   )
 }
+
+
+
+

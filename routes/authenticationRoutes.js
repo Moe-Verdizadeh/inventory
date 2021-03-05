@@ -8,6 +8,7 @@ import * as AuthenticationController from '../controllers/authenticationControll
 // Declare the routes
 router.post('/signup', AuthenticationController.userLoginCreate);  
 router.post('/signin', AuthenticationController.userLogin);  
+router.post('/signout', AuthenticationController.userLogOut);  
 
 // Export
 export default router;
