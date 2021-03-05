@@ -4,7 +4,8 @@ import jwt from 'jsonwebtoken';
 // this needs to go .env
 const JWT_SECRET = "my_secret"
 
-export const userLoginCreate = async (req, res, next) => {
+export const userLoginCreate = async (req, res) => {
+    console.log(req.body);
     try {
         let { email, password, userName } = req.body;
 
@@ -57,29 +58,31 @@ export const userLogin = async (req, res) => {
         const isMatch = await bcrypt.compare(password, user.password);
         if (!isMatch) return res.status(401).json({ msg: "Invalid credentials." });
         const token = jwt.sign({ id: user._id }, JWT_SECRET); 
-        res.json({
-            token,
-            user: {
-                id: user._id,
-                userName: user.userName,
-                email: user.email,
-            },
-        });
-        res.cookie("token", token, {
-            httpOnly: true,
-            secure: true,
-            sameSite: "none", 
-        }).send();
+        // res.json({
+        //     token,
+        //     user: {
+        //         id: user._id,
+        //         userName: user.userName,
+        //         email: user.email,
+        //     },
+        // });
+        req.session.testMe = 'testing';
+        console.log('hello');
+        console.log(token);
+        res.cookie('hello', 'hello', { httpOnly: true });
+        res.cookie('token', token, { httpOnly: true }).status(201).send({ success: "Logged in" });
+        // res.cookie("token", token, {
+        //     httpOnly: true,
+        //     secure: true,
+        //     sameSite: "none", 
+        // }).status(200).send({token: token, user: { id: user._id, userName: user.userName, email: user.email }});
     } catch(err) {
         res.status(500).json({ error: "err.message" });
     }
 }
 
 export const userLogOut = ( res, req ) => {
-    res.cookie("token", "", {
-        httpOnly: true,
-        expires: new Date(0)
-    }).send();
+    //res.clearCookie("token").status(200).send();
 }
  
 

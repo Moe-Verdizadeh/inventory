@@ -1,24 +1,48 @@
 import axios from 'axios';
 import React, { useState } from 'react';
 import { Form, Button } from 'react-bootstrap';
+import { Redirect } from 'react-router-dom';
 
 export default function SignIn() {
 
   const [email, setEmail] = useState(""); 
   const [password, setPassword] = useState("");
+  const [shouldRedirect, setShouldRedirect] = useState(false);
 
   async function signIn(e){
     e.preventDefault();
-    try{
+
+    console.log('hello');
+
     const signInData = {
-      email, 
+      email,
       password,
     };
 
-    await axios.post('http://localhost:8000/login/signin', signInData);
-    }  catch(err) {
-      console.error(err);
-    } 
+    axios.post('/login/signin', signInData)
+    .then(result => {
+      console.log(result);
+      setShouldRedirect(true);
+    })
+    .catch();
+    // try{
+    //   const signInData = {
+    //     email, 
+    //     password,
+    //   };
+
+    //   let data = await axios.post('http://localhost:8000/login/signin', signInData);
+    //   if (data) {
+    //     console.log(data);
+    //     setShouldRedirect(true);
+    //   }
+    // }  catch(err) {
+    //   console.error(err);
+    // }
+  }
+
+  if (shouldRedirect) {
+    return <Redirect to='/' />;
   }
 
   return (
