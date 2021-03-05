@@ -33,9 +33,10 @@ export const userLoginCreate = async (req, res, next) => {
             },
             JWT_SECRET
         ); 
-
         res.cookie("token", token, {
-            httpOnly: true, 
+            httpOnly: true,
+            secure: true,
+            sameSite: "none",
         }).send();
     } catch (err){
         res.status(500).json({ error: err.message });
@@ -65,7 +66,9 @@ export const userLogin = async (req, res) => {
             },
         });
         res.cookie("token", token, {
-            httpOnly: true, 
+            httpOnly: true,
+            secure: true,
+            sameSite: "none", 
         }).send();
     } catch(err) {
         res.status(500).json({ error: "err.message" });

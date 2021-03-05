@@ -1,8 +1,7 @@
-import React, { useState }  from 'react'; 
-import 'bootstrap/dist/css/bootstrap.min.css';  
-import Dashboard from './components/Dashboard/Dashboard'; 
-import SignUp from  './components/Login/SignUp';
-import SignIn from './components/Login/SignIn'
+import React  from 'react'; 
+import 'bootstrap/dist/css/bootstrap.min.css';   
+import Router  from './Router';
+import Header from './components/Header';
 
 function App() {
  
@@ -13,9 +12,8 @@ function App() {
 
   return (
     <div> 
-      <Dashboard />  
-      <SignUp /> 
-      <SignIn /> 
+      <Header />
+      <Router />   
     </div>
   );
 }
