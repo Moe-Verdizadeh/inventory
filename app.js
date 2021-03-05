@@ -25,6 +25,34 @@ app.use(session({
 	resave: true,
 	saveUninitialized: true
 }));
+
+//Authentication helper
+const isAuthenticated = (req) => {
+	const token = (req.cookies && req.cookies.token) ||
+				  (req.body && req.body.token) ||
+				  (req.query && req.query.token) ||
+				  (req.headers && req.headers['x-access-token']);
+	if(req.session.userId) return true;
+	if(!token) return false;
+
+	jwt.verify(token, 'imasecretshh', function(err, decoded){
+		console.log(err);
+		if(err) return false;
+		return true;
+	});
+};
+
+//Initialize auth helper
+app.use((req, res, next) => {
+	req.isAuthenticated = () => {
+		if(!isAuthenticated(req)) return false;
+
+		return true;
+	}
+
+	res.locals.isAuthenticated = isAuthenticated(req);
+	next();
+});
  
 //DB config
 mongoose.connect(connection_url, {
