@@ -10,8 +10,8 @@ function Header({isAuthenticated}) {
         <Navbar bg="dark" variant="dark">
         <Navbar.Brand href="/">Inventory</Navbar.Brand>
         <Nav className="mr-auto">
-          <Nav.Link as={NavLink} to="/">Home</Nav.Link>
-          <Nav.Link as={NavLink} to="/dashboard">Dashboard</Nav.Link>
+          {isAuthenticated && <Nav.Link as={NavLink} to="/">Home</Nav.Link>}
+          {isAuthenticated && <Nav.Link as={NavLink} to="/dashboard">Dashboard</Nav.Link>}
           {!isAuthenticated && <Nav.Link as={NavLink} to="/signin">Sign In</Nav.Link>}
           {!isAuthenticated && <Nav.Link as={NavLink} to="/signup">Sign Up</Nav.Link>}
           {isAuthenticated && <Nav.Link as={NavLink} to="/signout">Sign Out</Nav.Link>}

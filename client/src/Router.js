@@ -10,19 +10,19 @@ export default function Router({isAuthenticated, setIsAuthenticated}) {
     if(!isAuthenticated) {
         return(
             <Switch> 
-                <Route setIsAuthenticated={setIsAuthenticated} exact path='/signin'>
-                    <SignIn />
+                <Route  exact path='/signin'>
+                    <SignIn setIsAuthenticated={setIsAuthenticated}/>
                 </Route> 
-                    {!isAuthenticated && <Route exact path='/signup'>
-                        <Signup />
-                </Route>  }
+                <Route exact path='/signup'>
+                    <Signup />
+                </Route>  
             </Switch>
         )
     } else {
         return (
             <Switch>
                 <Route exact path="/">
-                    <Home />
+                    <Home setIsAuthenticated={setIsAuthenticated} />
                 </Route>
                 <Route path='/signin'>
                     <SignIn />
@@ -31,7 +31,7 @@ export default function Router({isAuthenticated, setIsAuthenticated}) {
                         <Signup />
                 </Route>  }
                 <Route path='/dashboard'>
-                    <Dashboard />
+                    <Dashboard setIsAuthenticated={setIsAuthenticated} />
                 </Route> 
                 <Route path='/signout'>
                     <SignOut setIsAuthenticated={setIsAuthenticated} />
