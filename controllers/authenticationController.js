@@ -1,8 +1,6 @@
 import User from '../models/user.js';
 import bcrypt from 'bcryptjs';
-import jwt from 'jsonwebtoken';  
-// this needs to go .env
-const JWT_SECRET = "my_secret";
+import jwt from 'jsonwebtoken';   
 
 export const userLoginCreate = async (req, res) => {
     console.log(req.body);
@@ -32,7 +30,7 @@ export const userLoginCreate = async (req, res) => {
             {
               user: savedUser._id,
             },
-            JWT_SECRET
+            process.env.JWT_SECRET
         ); 
         res.cookie("token", token, {
             httpOnly: true,
@@ -57,7 +55,7 @@ export const userLogin = async (req, res) => {
         }
         const isMatch = await bcrypt.compare(password, user.password);
         if (!isMatch) return res.status(401).json({ msg: "Invalid credentials." });
-        const token = jwt.sign({ id: user._id }, JWT_SECRET); 
+        const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET); 
         // res.json({
         //     token,
         //     user: {
@@ -98,106 +96,3 @@ export const checkAuthentication = (req, res) => {
     res.status(401).send();
 }
  
-
- 
-
-
-
-
-
-
-
-
-
-//  //old login code
-//  export const userLogin = (req, res) => {
-//     let { email, password } = req.body;
-    
-//     User.findOne({ email })
-//     .then(user => {
-//         if (!user) {
-//             return res.status(404).json({
-//                 errors: [{ user: "not found" }],
-//             });
-//         } else {
-//             bcrypt.compare(password, user.password)
-//             .then(isMatch => {
-//                 if (!isMatch) {
-//                     return res.status(400).json({ errors: [{ password: "incorrect" }] });
-//                 }
-//                 let access_token = createJWT(
-//                     user.email,
-//                     user._id,
-//                     3600
-//                 );
-                // jwt.sign(access_token, TOKEN_SECRET, (err, decoded) => {
-                //     if (err) {
-                //         res.status(500).json({ err: err });
-                //     }
-                //     if (decoded) {
-                //         return res.status(200).json({
-                //             success: true,
-                //             token: access_token,
-                //             message: user
-                //         });
-                //     }
-                // });
-//             })
-//             .catch(err => {
-//                 res.status(500).json({ err: "oops" });
-//             });
-//         }
-//     })
-//     .catch(err => {
-//         res.status(500).json({ err: err });
-//     });
-// }
-
-
-//OLD CODE SIGN UP
-// export const userLoginCreate = (req, res, next) => {
-//     try{ 
-//         let { userName, email, password } = req.body; 
-//         if ( !email || !userName || !password){
-//             return res.status(400).json({ errMsg: "Please fill in all fields" });
-//         }
-//         User.findOne({ email })
-//         .then(user=>{
-//         if(user){
-//             return res.status(422).json({ errors: [{ user: "An account with this EMAIL already exists" }] });
-//         } else {
-//             const user = new User({
-//                 userName: userName,
-//                 email: email,
-//                 password: password,
-//             });
-//             bcrypt.genSalt(10, function(err, salt) { 
-//                 bcrypt.hash(password, salt, function(err, hash) {
-//                     if (err) throw err;
-//                         user.password = hash;
-//                         user.save()
-//                         .then(response => {
-//                             res.status(200).json({
-//                                 success: true,
-//                                 result: response
-//                             })
-//                         })
-//                         .catch(err => {
-//                             res.status(500).json({
-//                                 errors: [{ err: 'oops' }]
-//                         });
-//                     });
-//                 });
-//             });
-//         }
-//     }).catch(err =>{
-//         res.status(500).json({
-//             errors: [{ error: 'Something went wrong' }]
-//     });
-// }) 
-
-//     } catch ( err ) {
-//         console.error( err );
-//         res.status(500).send();
-//     }
-// }
