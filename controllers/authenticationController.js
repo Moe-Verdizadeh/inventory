@@ -80,7 +80,7 @@ export const userLogin = async (req, res) => {
 };
 
 export const userLogOut = ( req, res ) => {
-    //res.clearCookie("token").status(200).send();
+    res.clearCookie("token").status(200).send();
     let authed = req.isAuthenticated();
     console.log('This is the auth state: ', authed);
     //console.log(req.isAuthenticated());

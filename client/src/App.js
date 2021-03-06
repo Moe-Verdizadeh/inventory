@@ -6,12 +6,7 @@ import axios from 'axios';
 
 function App() {
 
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
- 
-  // const [token, setToken] = useState();
-  // if(!token) {
-  //   return <SignIn setToken={setToken} />
-  // }
+  const [isAuthenticated, setIsAuthenticated] = useState(false); 
 
   useEffect(() =>{
     axios.get('/login/checkauth')
