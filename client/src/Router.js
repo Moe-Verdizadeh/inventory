@@ -9,7 +9,14 @@ import Home from './pages/Home';
 export default function Router({isAuthenticated, setIsAuthenticated}) {
     if(!isAuthenticated) {
         return(
-            <SignIn setIsAuthenticated={setIsAuthenticated} />
+            <Switch> 
+                <Route setIsAuthenticated={setIsAuthenticated} exact path='/signin'>
+                    <SignIn />
+                </Route> 
+                    {!isAuthenticated && <Route exact path='/signup'>
+                        <Signup />
+                </Route>  }
+            </Switch>
         )
     } else {
         return (
@@ -22,7 +29,7 @@ export default function Router({isAuthenticated, setIsAuthenticated}) {
                 </Route> 
                     {!isAuthenticated && <Route path='/signup'>
                         <Signup />
-                    </Route>  }
+                </Route>  }
                 <Route path='/dashboard'>
                     <Dashboard />
                 </Route> 
