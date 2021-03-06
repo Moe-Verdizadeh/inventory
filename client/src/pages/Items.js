@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import axios from '../axios';
+import axios from 'axios';
 import EditModal from '../components/EditModal';
 import ItemTable from '../components/ItemTable';
 import NewItemForm from '../components/NewItemForm';
@@ -12,7 +12,7 @@ function Items() {
 
     // fetching data
     async function fetchData(){
-        const req = await axios.get('/inventory');
+        const req = await axios.get('/api/inventory');
 
         setItems(req.data);
     }
@@ -20,7 +20,7 @@ function Items() {
     // shows the modal
     const showHandler = async (event) => {
         try {
-            const itemToEdit = await axios.get(`/inventory/item/${event.target.dataset.itemId}`);
+            const itemToEdit = await axios.get(`/api/inventory/item/${event.target.dataset.itemId}`);
             
             setCurrentEditItem(itemToEdit.data);
             setShow(true);
@@ -36,7 +36,7 @@ function Items() {
     // adding data (button)
     async function clickHandler() {
         try {
-            await axios.post('/inventory/item',
+            await axios.post('/api/inventory/item',
             {
                 newItem: itemInfo
             });
@@ -68,7 +68,7 @@ function Items() {
     //deleting data
     function deleteHandler(event){
 
-        axios.delete(`/inventory/delete/${event.target.dataset.itemId}`)
+        axios.delete(`/api/inventory/delete/${event.target.dataset.itemId}`)
         .then(response => {
             fetchData();
         })
@@ -91,7 +91,7 @@ function Items() {
 
     // saves the currently edited item
     const saveEditHandler = (event) => {
-        axios.put(`/inventory/item/${event.target.dataset.itemId}`,
+        axios.put(`/api/inventory/item/${event.target.dataset.itemId}`,
         {
             editedItem: currentEditItem
         })

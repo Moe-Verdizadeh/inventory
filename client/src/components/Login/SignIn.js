@@ -19,7 +19,7 @@ export default function SignIn({setIsAuthenticated}) {
       password,
     };
 
-    axios.post('/login/signin', signInData)
+    axios.post('/api/login/signin', signInData)
     .then(result => {
       console.log(result);
       setIsAuthenticated(true);

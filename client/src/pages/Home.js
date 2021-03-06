@@ -4,7 +4,7 @@ import { Button } from 'react-bootstrap';
 
 function Home() {
     function handleClick() {
-        axios.get('/login/checkauth')
+        axios.get('/api/login/checkauth')
         .then(result => {
             console.log(result);
         })

@@ -9,7 +9,7 @@ function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false); 
 
   useEffect(() =>{
-    axios.get('/login/checkauth')
+    axios.get('api/login/checkauth')
     .then(result => {
       console.log(result.status);
       setIsAuthenticated(true);

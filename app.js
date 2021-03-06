@@ -66,7 +66,7 @@ mongoose.connect(connection_url, {
 
 //API Endpoint
 import routes from './routes.js';
-app.use('/', routes);
+app.use('/api', routes);
 
 //test
 const root = path.join(path.resolve(), '/client/build');

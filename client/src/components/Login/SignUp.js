@@ -17,7 +17,7 @@ export default function Signup() {
       password,
     };
 
-    await axios.post('http://localhost:8000/login/signup', signUpData);
+    await axios.post('http://localhost:8000/api/login/signup', signUpData);
     }  catch(err) {
       console.error(err);
     } 
