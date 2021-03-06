@@ -19,7 +19,7 @@ export default function Signup() {
       password,
     };
 
-    await axios.post('http://localhost:8000/api/login/signup', signUpData);
+    await axios.post('/api/login/signup', signUpData);
       setRedirect(true);
     }  catch(err) {
       console.error(err);
