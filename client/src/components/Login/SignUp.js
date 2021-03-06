@@ -40,7 +40,7 @@ export default function Signup() {
 
           <Form.Group controlId="formBasicPassword">
             <Form.Label>Password</Form.Label>
-            <Form.Control type="password" placeholder="Password" onChange={( e ) => setPassword(e.target.value)} value={password} />
+            <Form.Control type="password" placeholder="Password" onChange={( e ) => setPassword(e.target.value)}  />
           </Form.Group>
 
           {/* <Form.Group controlId="formBasicCheckbox">
