@@ -28,7 +28,7 @@ app.use(session({
 
 //Authentication helper
 const isAuthenticated = (req) => {
-    //console.log('Cookies: ', req.cookies);
+    console.log('Cookies: ', req.cookies);
 	const token = (req.cookies && req.cookies.token) ||
 				  (req.body && req.body.token) ||
 				  (req.query && req.query.token) ||

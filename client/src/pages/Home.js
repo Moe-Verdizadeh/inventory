@@ -4,7 +4,7 @@ import { Button } from 'react-bootstrap';
 
 function Home() {
     function handleClick() {
-        axios.post('/login/signout')
+        axios.get('/login/checkauth')
         .then(result => {
             console.log(result);
         })

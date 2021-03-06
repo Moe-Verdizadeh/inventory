@@ -92,7 +92,13 @@ export const userLogOut = ( req, res ) => {
 };
 
 export const checkAuthentication = (req, res) => {
-    if(req.isAuthenticated()) res.status(200).send();
-    res.status(401).send();
+    let authed = req.isAuthenticated();
+    console.log('This is the auth state: ', authed);
+    if(authed) {
+        console.log('authed');
+        res.status(200).send();
+    } else {
+        res.status(401).send();
+    }
 }
  
