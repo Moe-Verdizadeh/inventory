@@ -27,7 +27,7 @@ export default function Signup() {
   }
 
   if (redirect) {
-    return <Redirect to='/' />;
+    return <Redirect to='/signin' />;
   }
 
   return ( 
