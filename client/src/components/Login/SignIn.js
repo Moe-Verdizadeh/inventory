@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import { Form, Button } from 'react-bootstrap';
 import { Redirect } from 'react-router-dom';
 
-export default function SignIn() {
+export default function SignIn({setIsAuthenticated}) {
 
   const [email, setEmail] = useState(""); 
   const [password, setPassword] = useState("");
@@ -22,6 +22,7 @@ export default function SignIn() {
     axios.post('/login/signin', signInData)
     .then(result => {
       console.log(result);
+      setIsAuthenticated(true);
       setShouldRedirect(true);
     })
     .catch();

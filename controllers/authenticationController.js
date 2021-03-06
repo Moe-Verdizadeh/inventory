@@ -92,6 +92,11 @@ export const userLogOut = ( req, res ) => {
         res.status(401).send();
     }
 };
+
+export const checkAuthentication = (req, res) => {
+    if(req.isAuthenticated()) res.status(200).send();
+    res.status(401).send();
+}
  
 
  
