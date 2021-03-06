@@ -14,6 +14,7 @@ function Header({isAuthenticated}) {
           <Nav.Link as={NavLink} to="/dashboard">Dashboard</Nav.Link>
           {!isAuthenticated && <Nav.Link as={NavLink} to="/signin">Sign In</Nav.Link>}
           {!isAuthenticated && <Nav.Link as={NavLink} to="/signup">Sign Up</Nav.Link>}
+          {isAuthenticated && <Nav.Link as={NavLink} to="/signout">Sign Out</Nav.Link>}
         </Nav> 
       </Navbar>
     )

@@ -3,12 +3,14 @@ import { Switch, Route } from 'react-router-dom';
 import Dashboard from './components/Dashboard/Dashboard';
 import SignIn from './components/Login/SignIn';
 import Signup from './components/Login/SignUp';
+import SignOut from './components/Login/SignOut';
 import Home from './pages/Home';
 
 export default function Router({isAuthenticated, setIsAuthenticated}) {
     if(!isAuthenticated) {
         return(
-            <SignIn setIsAuthenticated={setIsAuthenticated} />
+            <SignIn setIsAuthenticated={setIsAuthenticated} />,
+            <SignOut setIsAuthenticated={setIsAuthenticated} />
         )
     } else {
         return (
@@ -24,6 +26,9 @@ export default function Router({isAuthenticated, setIsAuthenticated}) {
                     </Route>  }
                 <Route path='/dashboard'>
                     <Dashboard />
+                </Route> 
+                <Route path='/signout'>
+                    <SignOut />
                 </Route> 
             </Switch>
         )
