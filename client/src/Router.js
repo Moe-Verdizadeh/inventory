@@ -18,10 +18,10 @@ export default function Router({isAuthenticated, setIsAuthenticated}) {
                 </Route>
                 <Route path='/signin'>
                     <SignIn />
-                </Route>
-                <Route path='/signup'>
-                    <Signup />
                 </Route> 
+                    {!isAuthenticated && <Route path='/signup'>
+                        <Signup />
+                    </Route>  }
                 <Route path='/dashboard'>
                     <Dashboard />
                 </Route> 

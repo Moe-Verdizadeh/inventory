@@ -5,8 +5,10 @@ import jwt from 'jsonwebtoken';
 import cookieParser from 'cookie-parser';
 import session from 'express-session';
 import path from 'path';
+import dotenv from 'dotenv';
+dotenv.config();
 
-const JWT_SECRET = "my_secret";
+// const JWT_SECRET = "my_secret";
 
 //app config
 const app = express();
@@ -33,18 +35,10 @@ const isAuthenticated = (req) => {
 				  (req.headers && req.headers['x-access-token']);
     //console.log('token', token);
 	if(req.session.userId) return true;
-	if(!token) return false;
+	if(!token) return false; 
 
-	// jwt.verify(token, JWT_SECRET, function(err, decoded){
-	// 	console.log('error', err);
-    //     console.log('decoded', decoded);
-	// 	if(err) return false;
-    //     console.log('should be true?');
-    //     if(decoded) return true;
-    //     console.log('shouldnt see');
-	// 	return true;
-	// });
-    let decoded = jwt.verify(token, JWT_SECRET);
+
+    let decoded = jwt.verify(token, process.env.JWT_SECRET);
     if(decoded) return true;
     return false;
 };

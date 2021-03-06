@@ -24,7 +24,7 @@ function App() {
 
   return (
     <div> 
-      <Header />
+      <Header isAuthenticated={isAuthenticated}/>
       <Router isAuthenticated={isAuthenticated} setIsAuthenticated={setIsAuthenticated}/>
     </div>
   );
