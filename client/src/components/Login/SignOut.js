@@ -1,14 +1,21 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import axios from 'axios';
-import { Button } from 'react-bootstrap'
+import { Button } from 'react-bootstrap';
+import { Redirect } from 'react-router-dom';
 
-export default function SignOut() { 
+export default function SignOut({setIsAuthenticated}) { 
 
-        axios.post('/api/login/signOut')  
+     useEffect(() => {
+        axios.post('/api/login/signout')
+        .then(result => {
+            setIsAuthenticated(false);
+        })
+        .catch(err => {
+            setIsAuthenticated(false);
+        });
+     });
         
     return (
-        <div>
-            <Button>Sign Out</Button>
-        </div>
+        <Redirect to="/" />
     )
 }

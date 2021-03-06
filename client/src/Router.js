@@ -9,8 +9,7 @@ import Home from './pages/Home';
 export default function Router({isAuthenticated, setIsAuthenticated}) {
     if(!isAuthenticated) {
         return(
-            <SignIn setIsAuthenticated={setIsAuthenticated} />,
-            <SignOut setIsAuthenticated={setIsAuthenticated} />
+            <SignIn setIsAuthenticated={setIsAuthenticated} />
         )
     } else {
         return (
@@ -28,7 +27,7 @@ export default function Router({isAuthenticated, setIsAuthenticated}) {
                     <Dashboard />
                 </Route> 
                 <Route path='/signout'>
-                    <SignOut />
+                    <SignOut setIsAuthenticated={setIsAuthenticated} />
                 </Route> 
             </Switch>
         )

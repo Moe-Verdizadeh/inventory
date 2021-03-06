@@ -81,14 +81,14 @@ export const userLogin = async (req, res) => {
 
 export const userLogOut = ( req, res ) => {
     res.clearCookie("token").status(200).send();
-    let authed = req.isAuthenticated();
-    console.log('This is the auth state: ', authed);
+    // let authed = req.isAuthenticated();
+    // console.log('This is the auth state: ', authed);
     //console.log(req.isAuthenticated());
-    if(authed) {
-        res.status(200).send();
-    } else {
-        res.status(401).send();
-    }
+    // if(authed) {
+    //     res.status(200).send();
+    // } else {
+    //     res.status(401).send();
+    // }
 };
 
 export const checkAuthentication = (req, res) => {
