@@ -1,12 +1,14 @@
 import axios from 'axios';
 import React, { useState } from 'react';
 import { Form, Button } from 'react-bootstrap';
+import { Redirect } from 'react-router-dom';
 
 export default function Signup() {
 
   const [userName, setUserName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [redirect, setRedirect] = useState("");
 
   async function signUp(e){
     e.preventDefault();
@@ -18,9 +20,14 @@ export default function Signup() {
     };
 
     await axios.post('http://localhost:8000/api/login/signup', signUpData);
+      setRedirect(true);
     }  catch(err) {
       console.error(err);
     } 
+  }
+
+  if (redirect) {
+    return <Redirect to='/' />;
   }
 
   return ( 
