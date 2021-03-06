@@ -6,7 +6,7 @@ import cookieParser from 'cookie-parser';
 import session from 'express-session';
 import path from 'path';
 
-export const jwtSecret = "my_secret";
+const JWT_SECRET = "my_secret";
 
 //app config
 const app = express();
@@ -14,8 +14,6 @@ const port = process.env.PORT || 8000;
 const connection_url = 'mongodb+srv://mokode:TeddyMo3@inventory-project.bcxkk.mongodb.net/inventoryDb?retryWrites=true&w=majority'
 
 //middleware
-app.use(express.json());
-app.use(cors());
 app.use(cookieParser());
 app.use(session({
 	secret: (process.env.secret || 'mybigsecret'),
@@ -28,31 +26,42 @@ app.use(session({
 
 //Authentication helper
 const isAuthenticated = (req) => {
+    //console.log('Cookies: ', req.cookies);
 	const token = (req.cookies && req.cookies.token) ||
 				  (req.body && req.body.token) ||
 				  (req.query && req.query.token) ||
 				  (req.headers && req.headers['x-access-token']);
+    //console.log('token', token);
 	if(req.session.userId) return true;
 	if(!token) return false;
 
-	jwt.verify(token, 'imasecretshh', function(err, decoded){
-		console.log(err);
-		if(err) return false;
-		return true;
-	});
+	// jwt.verify(token, JWT_SECRET, function(err, decoded){
+	// 	console.log('error', err);
+    //     console.log('decoded', decoded);
+	// 	if(err) return false;
+    //     console.log('should be true?');
+    //     if(decoded) return true;
+    //     console.log('shouldnt see');
+	// 	return true;
+	// });
+    let decoded = jwt.verify(token, JWT_SECRET);
+    if(decoded) return true;
+    return false;
 };
 
 //Initialize auth helper
 app.use((req, res, next) => {
 	req.isAuthenticated = () => {
 		if(!isAuthenticated(req)) return false;
-
 		return true;
 	}
 
 	res.locals.isAuthenticated = isAuthenticated(req);
 	next();
 });
+
+app.use(express.json());
+app.use(cors());
  
 //DB config
 mongoose.connect(connection_url, {

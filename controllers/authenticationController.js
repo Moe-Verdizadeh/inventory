@@ -2,7 +2,7 @@ import User from '../models/user.js';
 import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';  
 // this needs to go .env
-const JWT_SECRET = "my_secret"
+const JWT_SECRET = "my_secret";
 
 export const userLoginCreate = async (req, res) => {
     console.log(req.body);
@@ -42,7 +42,7 @@ export const userLoginCreate = async (req, res) => {
     } catch (err){
         res.status(500).json({ error: err.message });
     }
-}
+};
 
 export const userLogin = async (req, res) => {   
     try {
@@ -79,11 +79,19 @@ export const userLogin = async (req, res) => {
     } catch(err) {
         res.status(500).json({ error: "err.message" });
     }
-}
+};
 
-export const userLogOut = ( res, req ) => {
+export const userLogOut = ( req, res ) => {
     //res.clearCookie("token").status(200).send();
-}
+    let authed = req.isAuthenticated();
+    console.log('This is the auth state: ', authed);
+    //console.log(req.isAuthenticated());
+    if(authed) {
+        res.status(200).send();
+    } else {
+        res.status(401).send();
+    }
+};
  
 
  
