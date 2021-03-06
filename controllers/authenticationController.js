@@ -67,15 +67,15 @@ export const userLogin = async (req, res) => {
         req.session.testMe = 'testing';
         console.log('hello');
         console.log(token);
-        res.cookie('hello', 'hello', { httpOnly: true });
-        res.cookie('token', token, { httpOnly: true }).status(201).send({ success: "Logged in" });
-        // res.cookie("token", token, {
-        //     httpOnly: true,
-        //     secure: true,
-        //     sameSite: "none", 
-        // }).status(200).send({token: token, user: { id: user._id, userName: user.userName, email: user.email }});
+        // res.cookie('hello', 'hello', { httpOnly: true });
+        // res.cookie('token', token, { httpOnly: true }).status(201).send({ success: "Logged in" });
+        res.cookie("token", token, {
+            httpOnly: true,
+            secure: true,
+            sameSite: "none", 
+        }).status(200).send({token: token, user: { id: user._id, userName: user.userName, email: user.email }});
     } catch(err) {
-        res.status(500).json({ error: "err.message" });
+        res.status(500).json({ error: err.message });
     }
 };
 
