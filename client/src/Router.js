@@ -10,7 +10,7 @@ export default function Router({isAuthenticated, setIsAuthenticated}) {
     if(!isAuthenticated) {
         return(
             <Switch> 
-                <Route  exact path='/signin'>
+                <Route exact path='/signin'>
                     <SignIn setIsAuthenticated={setIsAuthenticated}/>
                 </Route> 
                 <Route exact path='/signup'>

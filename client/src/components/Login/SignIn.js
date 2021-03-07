@@ -10,10 +10,7 @@ export default function SignIn({setIsAuthenticated}) {
   const [shouldRedirect, setShouldRedirect] = useState(false);
 
   async function signIn(e){
-    e.preventDefault();
-
-    console.log('hello');
-
+    e.preventDefault(); 
     const signInData = {
       email,
       password,
@@ -43,7 +40,7 @@ export default function SignIn({setIsAuthenticated}) {
   }
 
   if (shouldRedirect) {
-    return <Redirect to='/' />;
+    return <Redirect to='/dashboard' />;
   }
 
   return (

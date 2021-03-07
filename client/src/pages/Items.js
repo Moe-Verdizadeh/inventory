@@ -111,7 +111,7 @@ function Items() {
     };
 
     return (
-        <div >
+        <div className="offset-1 col-10">
             <NewItemForm changeHandler={changeHandler} itemInfo={itemInfo} clickHandler={clickHandler}/>
             <ItemTable items={items} showHandler={showHandler} deleteHandler={deleteHandler} />
             <EditModal show={show} closeHandler={closeHandler} editingChangeHandler={editingChangeHandler} saveEditHandler={saveEditHandler} currentEditItem={currentEditItem} />

@@ -37,10 +37,11 @@ const isAuthenticated = (req) => {
 	if(req.session.userId) return true;
 	if(!token) return false; 
 
-
-    let decoded = jwt.verify(token, process.env.JWT_SECRET);
-    if(decoded) return true;
-    return false;
+	// had issues with this like of code
+	
+    // let decoded = jwt.verify(token, process.env.JWT_SECRET);
+    // if(decoded) return true;
+    // return false;
 };
 
 //Initialize auth helper
