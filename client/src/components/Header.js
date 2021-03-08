@@ -8,7 +8,7 @@ function Header({isAuthenticated}) {
 
     return (
         <Navbar bg="dark" variant="dark">
-        <Navbar.Brand href="/dashboard">Inventory</Navbar.Brand>
+        <Navbar.Brand to="/dashboard">Inventory</Navbar.Brand>
         <Nav className="mr-auto">
           <div className="row float-lg-right"> 
             {!isAuthenticated && <Nav.Link as={NavLink} to="/">Home</Nav.Link>}
